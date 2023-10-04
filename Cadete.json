@@ -1,0 +1,77 @@
+[
+    {
+      "Nombre":"juan Perez",
+      "Direccion":"Santa Fe 4150",
+      "Telefono":"3814215151"
+    },
+    {
+      "Nombre":"Pedro Pablo",
+      "Direccion":"Santiago 3512",
+      "Telefono":"3814784546"
+    },
+    {
+      "Nombre":"Milton Yavalio",
+      "Direccion":"Parana 2451",
+      "Telefono":"3814485123"
+    },
+    {
+      "Nombre":"Marco Poloc",
+      "Direccion":"San Lorenzo 4120",
+      "Telefono":"3814465798"
+    },
+    {
+      "Nombre":"Jacinto Tritri",
+      "Direccion":"avellaneda 150",
+      "Telefono":"3814215151"
+    },
+    {
+      "Nombre":"Polly Blues",
+      "Direccion":"Pedrera 412",
+      "Telefono":"3814845123"
+    },
+    {
+      "Nombre":"Homero Petinato",
+      "Direccion":"Thames 954",
+      "Telefono":"3814664512"
+    },
+    {
+      "Nombre":"Sofia Morandi",
+      "Direccion":"Fretensia 541",
+      "Telefono":"3814458214"
+    },
+    {
+      "Nombre":"Lucas Granados",
+      "Direccion":"Evergreen 641",
+      "Telefono":"3814541288"
+    },
+    {
+      "Nombre":"Miguel Fridman",
+      "Direccion":"Belgrano 3412",
+      "Telefono":"3816554127"
+    },
+    {
+      "Nombre":"Michael Favaloro",
+      "Direccion":"Bulnes 3248",
+      "Telefono":"3815664125"
+    },
+    {
+      "Nombre":"Rene Jordan",
+      "Direccion":"Vietma 754",
+      "Telefono":"3816451278"
+    },
+    {
+      "Nombre":"Entre Paredes",
+      "Direccion":"Buenos Aires 3250",
+      "Telefono":"3816321478"
+    },
+    {
+      "Nombre":"Lucena Panuelos",
+      "Direccion":"Callejon 1234",
+      "Telefono":"3815412879"
+    },
+    {
+      "Nombre":"David Forrandi",
+      "Direccion":"Calle Falsa 123",
+      "Telefono":"3815698421"
+    }
+  ]
