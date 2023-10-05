@@ -46,10 +46,15 @@ public class CadeteriaController : ControllerBase
         
     } 
 
-    [HttpGet(Name = "GetCadetes")]
+    [HttpGet("Cadetes")]
     public ActionResult<List<Cadete>> getCadetes(){
         var cadetes = cadeteria.getListaCadetes();
         return Ok(cadetes);
+    }
+     [HttpGet("Pedidos")]
+    public ActionResult<List<Pedidos>> GetPedidos(){
+        var pedidos = cadeteria.getListaPedidos();
+        return Ok(pedidos);
     }
 
     /*[HttpGet(Name = "GetWeatherForecast")]
