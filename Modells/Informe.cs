@@ -1,12 +1,10 @@
-using EspacioCadeteria; 
-using EspacioCadete;
-using EspacioPedidos;
 using System.Linq;
 using System.Collections; 
 using System.IO;
 using System.Reflection.Metadata.Ecma335;
 
-namespace EspacioInforme; 
+namespace Models;  
+ 
 
 public class Informe
 { 

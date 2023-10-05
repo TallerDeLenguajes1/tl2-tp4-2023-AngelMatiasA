@@ -2,9 +2,8 @@ using  System;
 using System.Collections; 
 using System.IO;
 using System.Runtime.CompilerServices;
-using EspacioCadete; 
-using EspacioCadeteria;
-using EspacioPedidos;
+using Models;
+
 
 namespace EspacioDatos; 
 

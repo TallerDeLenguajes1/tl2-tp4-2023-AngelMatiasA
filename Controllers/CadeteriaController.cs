@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using EspacioDatos;
+using Models;
+
 /* 
 c) Cree un Controlador Para la cadetería llamado CadeteriaController, y en el
 Implemente un endpoint para cada una de las operaciones ya existentes,
@@ -25,27 +28,30 @@ namespace tl2_tp4_2023_AngelMatiasA.Controllers;
 [Route("[controller]")]
 public class CadeteriaController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+    
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private Cadeteria cadeteria; 
+    private AccesoJSON datosJson;
+    private AccesoCSV datosCsv;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public CadeteriaController(ILogger<WeatherForecastController> logger)
     {
         _logger = logger;
+        datosJson = new AccesoJSON();
+        datosCsv = new AccesoCSV();
+        cadeteria = datosJson.cargarCadeteria("Cadeteria.json"); 
+        cadeteria.Cadetes = datosJson.cargarCadetes("Cadete.json");
+        cadeteria.asignarPedidosTesting(datosCsv.CargarPedidos("Pedidos.csv"));
+        
+    } 
+
+    [HttpGet(Name = "GetCadetes")]
+    public ActionResult<List<Cadete>> getCadetes(){
+        var cadetes = cadeteria.getListaCadetes();
+        return Ok(cadetes);
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
-    {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
-    }
+    /*[HttpGet(Name = "GetWeatherForecast")]
+    */
 }

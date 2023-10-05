@@ -2,9 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <!-- <Nullable>enable</Nullable> -->
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>tl2_tp4_2023_AngelMatiasA</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

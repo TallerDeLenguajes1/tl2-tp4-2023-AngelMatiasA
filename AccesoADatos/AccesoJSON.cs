@@ -1,9 +1,8 @@
 using System;
-using EspacioCadeteria;
-using EspacioCadete;
+using Models;
+
 using System.Text.Json;
 using System.IO;
-using EspacioInforme;
 namespace EspacioDatos;
 public class AccesoJSON : AccesoADatos
 {

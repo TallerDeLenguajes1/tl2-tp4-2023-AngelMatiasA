@@ -1,5 +1,6 @@
 using System; 
-namespace EspacioCliente; 
+namespace Models;  
+
 
 public class Cliente
 { 

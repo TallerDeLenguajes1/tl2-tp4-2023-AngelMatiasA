@@ -1,8 +1,7 @@
 using System;
 using System.Net.WebSockets;
-using EspacioCliente;
-using EspacioCadete;
-namespace EspacioPedidos;
+namespace Models;  
+
 
 public class Pedidos
 {

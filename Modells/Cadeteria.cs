@@ -1,8 +1,7 @@
 using System;
-using EspacioCadete;
-using EspacioPedidos;
 using System.Linq;
-namespace EspacioCadeteria;
+namespace Models;  
+
 
 public class Cadeteria
 {
@@ -35,7 +34,7 @@ public class Cadeteria
 
    }
 
-   public string NombreCadeteria { get ; set; }
+   public string NombreCadeteria { get; set; }
     public string TelefonoCadeteria { get; set; }
     public List<Cadete>? Cadetes {  get => cadetes; set => cadetes = value; }
    
