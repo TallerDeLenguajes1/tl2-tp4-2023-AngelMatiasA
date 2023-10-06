@@ -83,6 +83,11 @@ public class CadeteriaController : ControllerBase
         return BadRequest(null);
     }
 
+    [HttpGet("Informe")]
+    public ActionResult<Informe> getInforme(){
+        var informJson = cadeteria.getInformeJson();
+        return Ok(informJson);
+    }
 /* 
 c) Cree un Controlador Para la cadetería llamado CadeteriaController, y en el
 Implemente un endpoint para cada una de las operaciones ya existentes,

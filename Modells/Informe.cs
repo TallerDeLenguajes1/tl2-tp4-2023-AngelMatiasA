@@ -2,6 +2,7 @@ using System.Linq;
 using System.Collections; 
 using System.IO;
 using System.Reflection.Metadata.Ecma335;
+using System.Text.Json; 
 
 namespace Models;  
  
@@ -29,7 +30,7 @@ public class Informe
         CargarInforme( nuevacadeteria);
    
    }
-
+  
     public  void CargarInforme (Cadeteria nuevacadeteria){
           this.cadeteria = nuevacadeteria;
           int totalEnvixCad= 0; 

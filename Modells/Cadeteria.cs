@@ -1,6 +1,10 @@
 using System;
 using System.Linq;
 using EspacioDatos;
+using System.Text.Json;
+
+        
+
 namespace Models;  
 
 
@@ -10,6 +14,7 @@ public class Cadeteria
     private static readonly object lockObject = new object();
     private static AccesoCSV accesoCsv; 
     private static AccesoJSON accesoJson;
+    private static Informe informe;
     private List<Cadete>? cadetes;
     private List<Pedidos>? lisPedCadeteria;
     private Cadete? nuevoCadete;
@@ -63,6 +68,13 @@ public class Cadeteria
    public string NombreCadeteria { get; set; }
     public string TelefonoCadeteria { get; set; }
     public List<Cadete>? Cadetes {  get => cadetes; set => cadetes = value; }
+
+     public string getInformeJson(){
+        informe = new Informe(instance); 
+        string informeJson = JsonSerializer.Serialize(informe);
+        return informeJson;
+   }
+
    
     public List<Pedidos> getListaPedidos()
     {
