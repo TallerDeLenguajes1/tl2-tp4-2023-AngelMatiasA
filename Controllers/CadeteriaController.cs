@@ -46,6 +46,18 @@ public class CadeteriaController : ControllerBase
 
     }
 
+    [HttpPut("Asignar")]
+    public ActionResult<bool> AsignarPedido(int idPedido, int idCadete)
+    {
+        var asignado = cadeteria.asignarPedidos(idPedido, idCadete);
+        if (asignado)
+        {
+            return Ok(asignado);
+            
+        }
+        return BadRequest(null);
+    }
+
 /* 
 c) Cree un Controlador Para la cadetería llamado CadeteriaController, y en el
 Implemente un endpoint para cada una de las operaciones ya existentes,

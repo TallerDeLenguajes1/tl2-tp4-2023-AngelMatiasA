@@ -129,8 +129,10 @@ public List<Pedidos> mostrarPedidosPorEStado(int estado)
 
     }
  
-     public void asignarPedidos(int idPedido, int idCadete)
+ /*EN ESTE CASO SERIA MEJOR QUE DEVUELVA UN PEDIDO ?*/
+     public bool asignarPedidos(int idPedido, int idCadete)
     {
+        var asignado = false;
          var pedido = this.lisPedCadeteria
         .FirstOrDefault(p => p.NroPedido == idPedido);
 
@@ -142,9 +144,11 @@ public List<Pedidos> mostrarPedidosPorEStado(int estado)
         {
             pedido.CadetePed = cadete;
             pedido.Estado = pedido.getarreglosEstados(1);
+            asignado = true;
           
         }
     }
+        return asignado;
     }
 
 
