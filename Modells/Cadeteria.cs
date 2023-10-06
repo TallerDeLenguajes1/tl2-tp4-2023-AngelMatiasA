@@ -164,9 +164,10 @@ public List<Pedidos> mostrarPedidosPorEStado(int estado)
 //hacerlo q busqe x id tmb.. hya una pequeña incongruencia cuando el usuario
 //no ingresa el nombre o no coincide.. igual se le remueve de la lista del otro
 //usuario.. estaria bueno una tipo promesa...
-    public void reasignarPedidos(int idPedido, int idCadete)
+    public bool reasignarPedidos(int idPedido, int idCadete)
     {
-        asignarPedidos(idPedido, idCadete);
+        var reasignado = asignarPedidos(idPedido, idCadete);
+        return reasignado;
     }
 
  
