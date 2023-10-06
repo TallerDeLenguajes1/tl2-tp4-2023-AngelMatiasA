@@ -1,25 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
-/* 
-c) Cree un Controlador Para la cadetería llamado CadeteriaController, y en el
-Implemente un endpoint para cada una de las operaciones ya existentes,
-siguiendo la siguiente forma:
-● [Get] GetPedidos() => Retorna una lista de Pedidos
-● [Get] GetCadetes() => Retorna una lista de Cadetes
-● [Get] GetInforme() => Retorna un objeto Informe
-● [Post] AgregarPedido(Pedido pedido)
-● [Put] AsignarPedido(int idPedido, int idCadete)
-● [Put] CambiarEstadoPedido(int idPedido,int NuevoEstado)
-● [Put] CambiarCadetePedido(int idPedido,int idNuevoCadete)
-Recuerde que debe siempre debe retornar una respuesta a cada petición, respetando los
-códigos de estado vistos en clase.
-Tip:
-Se recomienda inicializar la cadeteria siguiendo un patrón Singleton, tal como se mostró
-en la teoría.
 
-
-*/
 
 namespace tl2_tp4_2023_AngelMatiasA.Controllers;
 
@@ -50,7 +32,38 @@ public class CadeteriaController : ControllerBase
         var pedidos = cadeteria.getListaPedidos();
         return Ok(pedidos);
     }
+    [HttpPost("Pedido")]
+    public ActionResult<Pedidos> agregarPedido(Pedidos pedido){
+        var pedidoAgregado = cadeteria.agregarPedido(pedido);
+        if (pedidoAgregado!=null)
+        {
+             
+            return Ok(pedidoAgregado);
+            
+        }
+        return BadRequest(null);
+         
+
+    }
+
+/* 
+c) Cree un Controlador Para la cadetería llamado CadeteriaController, y en el
+Implemente un endpoint para cada una de las operaciones ya existentes,
+siguiendo la siguiente forma:
+● [Get] GetPedidos() => Retorna una lista de Pedidos
+● [Get] GetCadetes() => Retorna una lista de Cadetes
+● [Get] GetInforme() => Retorna un objeto Informe
+● [Post] AgregarPedido(Pedido pedido)
+● [Put] AsignarPedido(int idPedido, int idCadete)
+● [Put] CambiarEstadoPedido(int idPedido,int NuevoEstado)
+● [Put] CambiarCadetePedido(int idPedido,int idNuevoCadete)
+Recuerde que debe siempre debe retornar una respuesta a cada petición, respetando los
+códigos de estado vistos en clase.
+Tip:
+Se recomienda inicializar la cadeteria siguiendo un patrón Singleton, tal como se mostró
+en la teoría.
 
 
+*/
    
 }

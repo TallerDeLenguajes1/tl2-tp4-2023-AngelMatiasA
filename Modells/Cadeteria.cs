@@ -87,6 +87,10 @@ public class Cadeteria
         lisPedCadeteria.Add(objCadete.altaPedido(observacion, nomcli, clidire, cliTelefono, cliDatRef));
 
     } 
+    public Pedidos agregarPedido(Pedidos pedido){
+        lisPedCadeteria.Add(pedido);
+        return pedido;
+    }
 
 
 
