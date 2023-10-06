@@ -94,12 +94,14 @@ public class Cadeteria
 
 
 
-    public void cambiarEStadoPedido(int idPedido, int estado){
+    public Pedidos cambiarEStadoPedido(int idPedido, int estado){
+        Pedidos pedido = null;
         estado --;
-        var pedido = this.lisPedCadeteria.FirstOrDefault(p=>p.NroPedido == idPedido); 
+         pedido = this.lisPedCadeteria.FirstOrDefault(p=>p.NroPedido == idPedido); 
         if (pedido!= null){
             pedido.Estado = pedido.getarreglosEstados(estado);
         }
+        return pedido;
 
     }
 

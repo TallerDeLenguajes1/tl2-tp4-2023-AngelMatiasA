@@ -58,6 +58,18 @@ public class CadeteriaController : ControllerBase
         return BadRequest(null);
     }
 
+    [HttpPut("Estado")]
+    public ActionResult<Pedidos> CambiarEstadoPedido(int idPedido,int NuevoEstado)
+    {
+        var pedido = cadeteria.cambiarEStadoPedido(idPedido, NuevoEstado);
+        if (pedido!= null)
+        {
+            return Ok(pedido);
+            
+        }
+        return BadRequest(null);
+    }
+
 /* 
 c) Cree un Controlador Para la cadetería llamado CadeteriaController, y en el
 Implemente un endpoint para cada una de las operaciones ya existentes,
