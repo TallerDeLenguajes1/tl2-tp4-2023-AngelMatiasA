@@ -1,10 +1,15 @@
 using System;
 using System.Linq;
+using EspacioDatos;
 namespace Models;  
 
 
 public class Cadeteria
 {
+    private static Cadeteria instance = null;
+    private static readonly object lockObject = new object();
+    private static AccesoCSV accesoCsv; 
+    private static AccesoJSON accesoJson;
     private List<Cadete>? cadetes;
     private List<Pedidos>? lisPedCadeteria;
     private Cadete? nuevoCadete;
@@ -32,6 +37,27 @@ public class Cadeteria
         lisPedCadeteria = new List<Pedidos>();
 
 
+   }
+   public static Cadeteria Instance
+   {
+        get
+        {
+            lock(lockObject)
+            {
+                if(instance == null)
+                {
+                    accesoJson = new AccesoJSON();
+                    accesoCsv = new AccesoCSV();
+                    instance = new Cadeteria();
+                    instance = Cadeteria.accesoJson.cargarCadeteria("Cadeteria.json");
+                    instance.Cadetes = Cadeteria.accesoJson.cargarCadetes("Cadete.json");
+                    instance.asignarPedidosTesting(accesoCsv.CargarPedidos("Pedidos.csv"));
+
+
+                }
+                return instance;
+            }
+        }
    }
 
    public string NombreCadeteria { get; set; }

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using EspacioDatos;
 using Models;
 
 /* 
@@ -32,17 +31,12 @@ public class CadeteriaController : ControllerBase
 
     private readonly ILogger<WeatherForecastController> _logger;
     private Cadeteria cadeteria; 
-    private AccesoJSON datosJson;
-    private AccesoCSV datosCsv;
+
 
     public CadeteriaController(ILogger<WeatherForecastController> logger)
     {
         _logger = logger;
-        datosJson = new AccesoJSON();
-        datosCsv = new AccesoCSV();
-        cadeteria = datosJson.cargarCadeteria("Cadeteria.json"); 
-        cadeteria.Cadetes = datosJson.cargarCadetes("Cadete.json");
-        cadeteria.asignarPedidosTesting(datosCsv.CargarPedidos("Pedidos.csv"));
+        cadeteria = Cadeteria.Instance;
         
     } 
 
@@ -57,6 +51,6 @@ public class CadeteriaController : ControllerBase
         return Ok(pedidos);
     }
 
-    /*[HttpGet(Name = "GetWeatherForecast")]
-    */
+
+   
 }
