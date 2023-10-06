@@ -10,6 +10,7 @@ namespace Models;
 
 public class Cadeteria
 {
+    private static AccesoADatosCadeteria datosCadeteria;
     private static Cadeteria instance = null;
     private static readonly object lockObject = new object();
     private static AccesoCSV accesoCsv; 
@@ -53,8 +54,9 @@ public class Cadeteria
                 {
                     accesoJson = new AccesoJSON();
                     accesoCsv = new AccesoCSV();
+                    datosCadeteria = new AccesoADatosCadeteria();
                     instance = new Cadeteria();
-                    instance = Cadeteria.accesoJson.cargarCadeteria("Cadeteria.json");
+                    instance = Cadeteria.datosCadeteria.cargarCadeteria("Cadeteria.json");
                     instance.Cadetes = Cadeteria.accesoJson.cargarCadetes("Cadete.json");
                     instance.asignarPedidosTesting(accesoCsv.CargarPedidos("Pedidos.csv"));
 

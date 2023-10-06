@@ -15,7 +15,7 @@ public class AccesoCSV: AccesoADatos
   
     
 
-    public override Cadeteria cargarCadeteria(string nombreArchivo){
+    public  Cadeteria cargarCadeteria(string nombreArchivo){
         Cadeteria nuevaCadeteria = new Cadeteria(); 
         if (existeArchivo(nombreArchivo))
         {
@@ -38,7 +38,7 @@ public class AccesoCSV: AccesoADatos
     }
 
 
-     public override List<Cadete> cargarCadetes(string nombreArchivo){
+     public  List<Cadete> cargarCadetes(string nombreArchivo){
           List<Cadete> CadetesCsv =  new List<Cadete>();  
           
         if (existeArchivo(nombreArchivo))

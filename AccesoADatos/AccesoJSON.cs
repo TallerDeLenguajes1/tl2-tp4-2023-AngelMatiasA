@@ -8,25 +8,25 @@ public class AccesoJSON : AccesoADatos
 {
 
     
-    public override Cadeteria cargarCadeteria(string nombreArchivo){
-        /* si o si lo tengo que inicializar aca xq sino el return no lo acepta o 
-        hay otra manera?*/
-        Cadeteria nuevaCadeteria = new Cadeteria(); 
-        if (existeArchivo(nombreArchivo))
-        {
-            using(var lector = new StreamReader(nombreArchivo))
-            {
-                var json = lector.ReadToEnd(); 
-                nuevaCadeteria = JsonSerializer.Deserialize<Cadeteria>(json);
-            }
+    // public override Cadeteria cargarCadeteria(string nombreArchivo){
+    //     /* si o si lo tengo que inicializar aca xq sino el return no lo acepta o 
+    //     hay otra manera?*/
+    //     Cadeteria nuevaCadeteria = new Cadeteria(); 
+    //     if (existeArchivo(nombreArchivo))
+    //     {
+    //         using(var lector = new StreamReader(nombreArchivo))
+    //         {
+    //             var json = lector.ReadToEnd(); 
+    //             nuevaCadeteria = JsonSerializer.Deserialize<Cadeteria>(json);
+    //         }
             
-        }
+    //     }
 
-        return nuevaCadeteria;
+    //     return nuevaCadeteria;
 
-    }
+    // }
   
-    public override List<Cadete> cargarCadetes(string nombreArchivo)
+    public  List<Cadete> cargarCadetes(string nombreArchivo)
     {
         if (existeArchivo(nombreArchivo))
         {
