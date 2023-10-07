@@ -1,1 +1,96 @@
-{"TotalEnvios":0,"EnviPromedXCadete":0,"NuevaLisInf":[{"IdCadete":1,"NombreCadete":"juan Perez","CantPorCadete":0,"MontoGanado":0},{"IdCadete":2,"NombreCadete":"Pedro Pablo","CantPorCadete":0,"MontoGanado":0},{"IdCadete":3,"NombreCadete":"Milton Yavalio","CantPorCadete":0,"MontoGanado":0},{"IdCadete":4,"NombreCadete":"Marco Poloc","CantPorCadete":0,"MontoGanado":0},{"IdCadete":5,"NombreCadete":"Jacinto Tritri","CantPorCadete":0,"MontoGanado":0},{"IdCadete":6,"NombreCadete":"Polly Blues","CantPorCadete":0,"MontoGanado":0},{"IdCadete":7,"NombreCadete":"Homero Petinato","CantPorCadete":0,"MontoGanado":0},{"IdCadete":8,"NombreCadete":"Sofia Morandi","CantPorCadete":0,"MontoGanado":0},{"IdCadete":9,"NombreCadete":"Lucas Granados","CantPorCadete":0,"MontoGanado":0},{"IdCadete":10,"NombreCadete":"Miguel Fridman","CantPorCadete":0,"MontoGanado":0},{"IdCadete":11,"NombreCadete":"Michael Favaloro","CantPorCadete":0,"MontoGanado":0},{"IdCadete":12,"NombreCadete":"Rene Jordan","CantPorCadete":0,"MontoGanado":0},{"IdCadete":13,"NombreCadete":"Entre Paredes","CantPorCadete":0,"MontoGanado":0},{"IdCadete":14,"NombreCadete":"Lucena Panuelos","CantPorCadete":0,"MontoGanado":0},{"IdCadete":15,"NombreCadete":"David Forrandi","CantPorCadete":0,"MontoGanado":0}]}
+{
+    "TotalEnvios": 0,
+    "EnviPromedXCadete": 0,
+    "NuevaLisInf": [
+        {
+            "IdCadete": 1,
+            "NombreCadete": "juan Perez",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 2,
+            "NombreCadete": "Pedro Pablo",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 3,
+            "NombreCadete": "Milton Yavalio",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 4,
+            "NombreCadete": "Marco Poloc",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 5,
+            "NombreCadete": "Jacinto Tritri",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 6,
+            "NombreCadete": "Polly Blues",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 7,
+            "NombreCadete": "Homero Petinato",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 8,
+            "NombreCadete": "Sofia Morandi",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 9,
+            "NombreCadete": "Lucas Granados",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 10,
+            "NombreCadete": "Miguel Fridman",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 11,
+            "NombreCadete": "Michael Favaloro",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 12,
+            "NombreCadete": "Rene Jordan",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 13,
+            "NombreCadete": "Entre Paredes",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 14,
+            "NombreCadete": "Lucena Panuelos",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        },
+        {
+            "IdCadete": 15,
+            "NombreCadete": "David Forrandi",
+            "CantPorCadete": 0,
+            "MontoGanado": 0
+        }
+    ]
+}

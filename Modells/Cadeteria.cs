@@ -85,8 +85,12 @@ public class Cadeteria
     public List<Cadete>? Cadetes {  get => cadetes; set => cadetes = value; }
 
      public string getInformeJson(){
+        instance = Cadeteria.datosCadeteria.cargarCadeteria("Cadeteria.json");
+                    instance.Cadetes = Cadeteria.datosCadetes.cargarCadetes("Cadete.json");
         informe = new Informe(instance); 
         string informeJson = JsonSerializer.Serialize(informe);
+        File.WriteAllText("informe2", informeJson);
+
         return informeJson;
    }
 
@@ -102,20 +106,14 @@ public class Cadeteria
     }
   
   
-    public void asignarPedidosTesting (List<Pedidos> pedidos){
-        this.lisPedCadeteria = pedidos; 
-        
 
-    }
-  
-
-    public void altaPedidoCadeteria( string observacion, string nomcli, string clidire, string cliTelefono, string cliDatRef)
-    {
+    // public void altaPedidoCadeteria( string observacion, string nomcli, string clidire, string cliTelefono, string cliDatRef)
+    // {
 
 
-        lisPedCadeteria.Add(objCadete.altaPedido(observacion, nomcli, clidire, cliTelefono, cliDatRef));
+    //     lisPedCadeteria.Add(objCadete.altaPedido(observacion, nomcli, clidire, cliTelefono, cliDatRef));
 
-    } 
+    // } 
     public Pedidos agregarPedido(Pedidos pedido){
         if (pedido != null)
         {
