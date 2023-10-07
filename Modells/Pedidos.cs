@@ -1,47 +1,55 @@
 using System;
 using System.Net.WebSockets;
 namespace Models;  
-
+public enum Estado
+{
+    Pendiente, 
+    Proceso,
+    Realizado
+    
+}
 
 public class Pedidos
 {
     private static int id = 0;
     private int nroPedido;
     private string observacion;
+    private Estado estado;
     private Cliente clienteNuevo;
 
     private Cadete cadetePed;
     // bool entregado = false; 
-    string[] arregloEstados = { "Sin Asignar", "En Proceso", "Realizado" };
-    private string estado = "";
+    // string[] arregloEstados = { "Sin Asignar", "En Proceso", "Realizado" };
+    // private string estado = "";
     private int idCadete;
 
     public int NroPedido { get => nroPedido; set => nroPedido = value; }
     public string Observacion { get => observacion; set => observacion = value; }
-    public string Estado { get => estado; set => estado = value; }
-    public Cadete CadetePed {get => cadetePed; set => cadetePed = value; }
+    public Estado Estado { get => estado; set => estado = value; }
+    public int IdCadete { get => idCadete; set => idCadete = value; }
+
+    // public Cadete CadetePed {get => cadetePed; set => cadetePed = value; }
     public Cliente ClienteNuevo {get => clienteNuevo; set => clienteNuevo = value; }
-    
 
     public Pedidos()
     {
         nroPedido = id++;
         this.idCadete = 0;
-        this.estado = arregloEstados[0];
+        this.estado = Estado.Pendiente;
         clienteNuevo = new Cliente();
     }
     public Pedidos(string observacion, string nomcli, string clidire, string cliTelefono, string cliDatRef)
     {
         this.nroPedido = id++;
         this.observacion = observacion;
-        this.estado = arregloEstados[0];
+        this.estado = Estado.Pendiente;
         clienteNuevo = new Cliente(nomcli, clidire, cliTelefono, cliDatRef);
         this.idCadete = 0;
     }
-    public string getarreglosEstados(int index)
-    {
-        return arregloEstados[index];
-    }
+    // public string getarreglosEstados(int index)
+    // {
+    //     return arregloEstados[index];
+    // }
     public int getIdCadetePedidos()
     {
         return this.idCadete;

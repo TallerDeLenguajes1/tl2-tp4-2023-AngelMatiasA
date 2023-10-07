@@ -49,9 +49,7 @@ public class Informe
           
             totalEnvixCad = cadeteria.getListaPedidos()
             .Where(
-                pedido => String.Equals(pedido.Estado, pedido.getarreglosEstados(2), StringComparison.OrdinalIgnoreCase) 
-                && pedido.CadetePed != null && pedido.CadetePed.Id == cadete.Id
-                ).ToList().Count;
+                p => p.Estado == Estado.Realizado && p.IdCadete != 0).ToList().Count;
             lisinforme.CantPorCadete = totalEnvixCad;
             lisinforme.MontoGanado =totalEnvixCad *500;
             lisinforme.NombreCadete=cadete.Nombre; 

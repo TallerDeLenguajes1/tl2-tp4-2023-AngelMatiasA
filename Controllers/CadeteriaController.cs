@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
-
-
 namespace tl2_tp4_2023_AngelMatiasA.Controllers;
 
 [ApiController]
@@ -41,7 +39,7 @@ public class CadeteriaController : ControllerBase
             return Ok(pedidoAgregado);
             
         }
-        return BadRequest(null);
+        return BadRequest("El pedido no existe.");
          
 
     }
@@ -55,11 +53,11 @@ public class CadeteriaController : ControllerBase
             return Ok(asignado);
             
         }
-        return BadRequest(null);
+        return BadRequest("El pedido no existe.");
     }
 
     [HttpPut("Estado")]
-    public ActionResult<Pedidos> CambiarEstadoPedido(int idPedido,int NuevoEstado)
+    public ActionResult<Pedidos> CambiarEstadoPedido(int idPedido, int NuevoEstado)
     {
         var pedido = cadeteria.cambiarEStadoPedido(idPedido, NuevoEstado);
         if (pedido!= null)
@@ -67,7 +65,11 @@ public class CadeteriaController : ControllerBase
             return Ok(pedido);
             
         }
-        return BadRequest(null);
+        else
+        {
+            return BadRequest("El pedido no existe.");
+        }
+        //fallla cuuando no exist el pedido
     }
 
        
@@ -80,7 +82,7 @@ public class CadeteriaController : ControllerBase
             return Ok(reasignado);
             
         }
-        return BadRequest(null);
+        return BadRequest("El pedido no existe.");
     }
 
     [HttpGet("Informe")]

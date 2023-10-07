@@ -120,6 +120,7 @@ public class Cadeteria
         if (pedido != null)
         {
             var listaPedidosActualizada = datosPedidos.obtener("Pedidos.json");
+            pedido.NroPedido = listaPedidosActualizada.Count;
             listaPedidosActualizada.Add(pedido);
             datosPedidos.Guardar("Pedidos.json",listaPedidosActualizada);
             
@@ -144,14 +145,28 @@ public class Cadeteria
     } */
 
 
-
-
     public Pedidos cambiarEStadoPedido(int idPedido, int estado){
+        // Pedidos pedido = null;
+        // estado --;
+        List<Pedidos> listPed =datosPedidos.obtener("Pedidos.json");
+         var pedido = listPed
+        .FirstOrDefault(p=>p.NroPedido == idPedido); 
+        if (pedido!= null && estado<=2 && estado>=0){
+            pedido.Estado = (Estado)estado;
+            datosPedidos.Guardar("Pedidos.json", listPed);
+            return pedido;
+        }
+        return null;
+
+    }
+
+
+    public Pedidos cambiarEStaadoPedido(int idPedido, int estado){
         Pedidos pedido = null;
         estado --;
          pedido = this.lisPedCadeteria.FirstOrDefault(p=>p.NroPedido == idPedido); 
         if (pedido!= null){
-            pedido.Estado = pedido.getarreglosEstados(estado);
+            // pedido.Estado = pedido.getarreglosEstados(estado);
         }
         return pedido;
 
@@ -159,21 +174,22 @@ public class Cadeteria
 
    
 
-public List<Pedidos> mostrarPedidosPorEStado(int estado)
-{
-    estado--; //para que la opcion ingresada disminuya al valor de arrayEstados
+// public List<Pedidos> mostrarPedidosPorEStado(int estado)
+// {
+//     estado--; //para que la opcion ingresada disminuya al valor de arrayEstados
     
-    List<Pedidos> pedidosFiltrados;
+//     ///aca tendria que usar datosPedidos para traerlos
+//     List<Pedidos> pedidosFiltrados;
 
-     pedidosFiltrados = this.lisPedCadeteria
-        .Where(pedido => String.Equals(pedido.Estado, pedido.getarreglosEstados(estado), StringComparison.OrdinalIgnoreCase))
-        .ToList();
+//      pedidosFiltrados = this.lisPedCadeteria
+//         .Where(pedido => pedido.Estado == (Estado)estado)
+//         .ToList();
 
    
-        return pedidosFiltrados;
+//         return pedidosFiltrados;
     
    
-}
+// }
 
 
     public void agregarCadete(string nombre, string direccion, string telefono)
@@ -187,6 +203,30 @@ public List<Pedidos> mostrarPedidosPorEStado(int estado)
      public bool asignarPedidos(int idPedido, int idCadete)
     {
         var asignado = false;
+        var listPed =datosPedidos.obtener("Pedidos.json");
+         var pedido = listPed
+        .FirstOrDefault(p => p.NroPedido == idPedido);
+
+    if (pedido != null)
+    {
+        var cadete = this.cadetes
+            .FirstOrDefault(c => c.Id == idCadete);
+        if (cadete != null)
+        {
+            pedido.IdCadete = idCadete;
+            pedido.Estado = Estado.Proceso;
+            datosPedidos.Guardar("Pedidos.json",listPed);
+            asignado = true;
+          
+        }
+    }
+        return asignado;
+    }
+
+    /*
+     public bool asignarPedidos(int idPedido, int idCadete)
+    {
+        var asignado = false;
          var pedido = this.lisPedCadeteria
         .FirstOrDefault(p => p.NroPedido == idPedido);
 
@@ -197,7 +237,7 @@ public List<Pedidos> mostrarPedidosPorEStado(int estado)
         if (cadete != null)
         {
             pedido.CadetePed = cadete;
-            pedido.Estado = pedido.getarreglosEstados(1);
+            pedido.Estado = Estado.Proceso;
             asignado = true;
           
         }
@@ -206,7 +246,7 @@ public List<Pedidos> mostrarPedidosPorEStado(int estado)
     }
 
 
-    
+    */
     public List<Cadete> mostrarCadetes()
     {
         
@@ -242,8 +282,7 @@ public List<Pedidos> mostrarPedidosPorEStado(int estado)
         if (cadete != null ){
             var cantPedidosRealizados = this.lisPedCadeteria
             .Where(
-                pedido => String.Equals(pedido.Estado, pedido.getarreglosEstados(2), StringComparison.OrdinalIgnoreCase) 
-                && pedido.CadetePed != null && pedido.CadetePed.Id == cadete.Id
+                pedido => pedido.Estado == Estado.Realizado && pedido.IdCadete == cadete.Id
                 ).ToList().Count;
                 montoACobrar = 500* cantPedidosRealizados;
         }
