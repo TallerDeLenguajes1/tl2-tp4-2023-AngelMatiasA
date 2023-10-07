@@ -11,7 +11,7 @@ namespace Models;
 public class Cadeteria
 {
     private static AccesoADatosCadetes datosCadetes;
-
+    private static AccesoADatosPedidos datosPedidos;
     private static AccesoADatosCadeteria datosCadeteria;
     private static Cadeteria instance = null;
     private static readonly object lockObject = new object();
@@ -54,14 +54,24 @@ public class Cadeteria
             {
                 if(instance == null)
                 {
+                    /*debo borrar todos esos atributos staticos d la clase? y debe ser asi?: 
+                      var datosCadeteria = new AccesoADatosCadeteria();
+                    instance = datosCadeteria.cargarCadeteria("Cadeteria.json");
+                    instance.datosCadetes = new AccesoADatosCadetes();
+                    instance.datosPedidos = new AccesoADatosPedidos();
+                    // instance.asignarPedatosdidosTesting(accesoCsv.CargarPedidos("Pedidos.csv"));
+*/
                     accesoJson = new AccesoJSON();
                     accesoCsv = new AccesoCSV();
                     datosCadeteria = new AccesoADatosCadeteria();
                     datosCadetes = new AccesoADatosCadetes();
+                    datosPedidos = new AccesoADatosPedidos();
+                    // instance.lisPedCadeteria =new List<Pedidos>();
                     instance = new Cadeteria();
+
                     instance = Cadeteria.datosCadeteria.cargarCadeteria("Cadeteria.json");
                     instance.Cadetes = Cadeteria.datosCadetes.cargarCadetes("Cadete.json");
-                    instance.asignarPedidosTesting(accesoCsv.CargarPedidos("Pedidos.csv"));
+                    // instance.asignarPedidosTesting(accesoCsv.CargarPedidos("Pedidos.csv"));
 
 
                 }
@@ -83,6 +93,7 @@ public class Cadeteria
    
     public List<Pedidos> getListaPedidos()
     {
+        lisPedCadeteria= datosPedidos.obtener("Pedidos.json");
         return this.lisPedCadeteria;
     }
     public List<Cadete> getListaCadetes()
@@ -92,7 +103,8 @@ public class Cadeteria
   
   
     public void asignarPedidosTesting (List<Pedidos> pedidos){
-        this.lisPedCadeteria = pedidos;
+        this.lisPedCadeteria = pedidos; 
+        
 
     }
   
@@ -105,9 +117,32 @@ public class Cadeteria
 
     } 
     public Pedidos agregarPedido(Pedidos pedido){
-        lisPedCadeteria.Add(pedido);
+        if (pedido != null)
+        {
+            var listaPedidosActualizada = datosPedidos.obtener("Pedidos.json");
+            listaPedidosActualizada.Add(pedido);
+            datosPedidos.Guardar("Pedidos.json",listaPedidosActualizada);
+            
+        }
+       
         return pedido;
     }
+    
+    /*
+     public ActionResult <string> AsignarPedido(int idCadete, int numPedido) {
+        var pedido = cadeteria.Pedidos.FirstOrDefault(p => p.Numero == numPedido);
+        var cadete = cadeteria.Cadetes.FirstOrDefault(p => p.Id == idCadete);
+        if (pedido != null) {
+            if (cadete != null) {
+                pedido.IdCadete = idCadete;
+                AccesoADatosPedidos.Guardar(cadeteria.Pedidos);
+                return (Ok(pedido));
+            }
+            return StatusCode(500,"No se pudo encontrar el cadete");
+        }
+        return StatusCode(500,"No se pudo encontrar el pedido");
+    } */
+
 
 
 

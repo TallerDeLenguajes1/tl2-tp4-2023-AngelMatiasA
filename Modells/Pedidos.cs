@@ -16,10 +16,12 @@ public class Pedidos
     private string estado = "";
     private int idCadete;
 
-    public int NroPedido { get => nroPedido; }
-    public Cadete CadetePed {get => cadetePed; set => cadetePed = value; }
+    public int NroPedido { get => nroPedido; set => nroPedido = value; }
     public string Observacion { get => observacion; set => observacion = value; }
     public string Estado { get => estado; set => estado = value; }
+    public Cadete CadetePed {get => cadetePed; set => cadetePed = value; }
+    public Cliente ClienteNuevo {get => clienteNuevo; set => clienteNuevo = value; }
+    
 
     public Pedidos()
     {
