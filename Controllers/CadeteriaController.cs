@@ -32,6 +32,28 @@ public class CadeteriaController : ControllerBase
         var pedidos = cadeteria.getListaPedidos();
         return Ok(pedidos);
     }
+
+    [HttpGet("PedidoPorId")]
+    public ActionResult<Pedidos> GetPedido(int idPedido)
+    {
+        try
+        {
+            var pedido = cadeteria.GetPedido(idPedido);
+            return Ok(pedido);
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return NotFound(ex.Message);
+        }
+    }
+
+
+
+
     [HttpPost("Pedido")]
     public ActionResult<Pedidos> agregarPedido(Pedidos pedido)
     {

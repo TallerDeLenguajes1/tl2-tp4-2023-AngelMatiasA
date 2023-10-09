@@ -152,23 +152,33 @@ public class Cadeteria
 
         return pedido;
     }
+//     ● [Get] GetPedido/{id} : devuelve un pedido especificado por el id
+// ● [Get] GetCadete/{id} : devuelve un cadete especificado por el id
+// ● [Post] AddCadete : agrega un cadete nuevo a la cadetería.
+private int cantidadPedidos (){
+    var cantPedidos = datosPedidos.obtener("Pedidos.json").Count;
+    return cantPedidos;
+}
 
-    // public List<Pedidos> mostrarPedidosPorEStado(int estado)
-    // {
-    //     estado--; //para que la opcion ingresada disminuya al valor de arrayEstados
+    public Pedidos GetPedido(int id)
+    {
+        var canPedidos = cantidadPedidos();
+       if(id<0 || id >= canPedidos){
+        throw new ArgumentException("el numero de id no existe");
 
-    //     ///aca tendria que usar datosPedidos para traerlos
-    //     List<Pedidos> pedidosFiltrados;
+       }
+        var pedido = datosPedidos.obtener("Pedidos.json").FirstOrDefault(p => p.NroPedido == id);
+        if(pedido == null){
+            throw new InvalidOperationException("El pedido no existe.");
 
-    //      pedidosFiltrados = this.lisPedCadeteria
-    //         .Where(pedido => pedido.Estado == (Estado)estado)
-    //         .ToList();
-
-
-    //         return pedidosFiltrados;
+        }
 
 
-    // }
+
+            return pedido;
+
+
+    }
 
 
     public void agregarCadete(string nombre, string direccion, string telefono)
