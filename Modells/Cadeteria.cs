@@ -3,9 +3,9 @@ using System.Linq;
 using EspacioDatos;
 using System.Text.Json;
 
-        
 
-namespace Models;  
+
+namespace Models;
 
 
 public class Cadeteria
@@ -15,7 +15,7 @@ public class Cadeteria
     private static AccesoADatosCadeteria datosCadeteria;
     private static Cadeteria instance = null;
     private static readonly object lockObject = new object();
-    private static AccesoCSV accesoCsv; 
+    private static AccesoCSV accesoCsv;
     private static AccesoJSON accesoJson;
     private static Informe informe;
     private List<Cadete>? cadetes;
@@ -32,8 +32,9 @@ public class Cadeteria
         lisPedCadeteria = new List<Pedidos>();
 
     }
-    public Cadeteria ( string pnombre, string ptelefono){
-        this.nombreCadeteria = pnombre; 
+    public Cadeteria(string pnombre, string ptelefono)
+    {
+        this.nombreCadeteria = pnombre;
         this.telefonoCadeteria = ptelefono;
         cadetes = new List<Cadete>();
         lisPedCadeteria = new List<Pedidos>();
@@ -45,14 +46,14 @@ public class Cadeteria
         lisPedCadeteria = new List<Pedidos>();
 
 
-   }
-   public static Cadeteria Instance
-   {
+    }
+    public static Cadeteria Instance
+    {
         get
         {
-            lock(lockObject)
+            lock (lockObject)
             {
-                if(instance == null)
+                if (instance == null)
                 {
                     /*debo borrar todos esos atributos staticos d la clase? y debe ser asi?: 
                       var datosCadeteria = new AccesoADatosCadeteria();
@@ -78,34 +79,35 @@ public class Cadeteria
                 return instance;
             }
         }
-   }
+    }
 
-   public string NombreCadeteria { get; set; }
+    public string NombreCadeteria { get; set; }
     public string TelefonoCadeteria { get; set; }
-    public List<Cadete>? Cadetes {  get => cadetes; set => cadetes = value; }
+    public List<Cadete>? Cadetes { get => cadetes; set => cadetes = value; }
 
-     public string getInformeJson(){
+    public string getInformeJson()
+    {
         instance = Cadeteria.datosCadeteria.cargarCadeteria("Cadeteria.json");
-                    instance.Cadetes = Cadeteria.datosCadetes.cargarCadetes("Cadete.json");
-        informe = new Informe(instance); 
+        instance.Cadetes = Cadeteria.datosCadetes.cargarCadetes("Cadete.json");
+        informe = new Informe(instance);
         string informeJson = JsonSerializer.Serialize(informe);
         File.WriteAllText("informe2", informeJson);
 
         return informeJson;
-   }
+    }
 
-   
+
     public List<Pedidos> getListaPedidos()
     {
-        lisPedCadeteria= datosPedidos.obtener("Pedidos.json");
+        lisPedCadeteria = datosPedidos.obtener("Pedidos.json");
         return this.lisPedCadeteria;
     }
     public List<Cadete> getListaCadetes()
     {
         return this.cadetes;
     }
-  
-  
+
+
 
     // public void altaPedidoCadeteria( string observacion, string nomcli, string clidire, string cliTelefono, string cliDatRef)
     // {
@@ -114,80 +116,59 @@ public class Cadeteria
     //     lisPedCadeteria.Add(objCadete.altaPedido(observacion, nomcli, clidire, cliTelefono, cliDatRef));
 
     // } 
-    public Pedidos agregarPedido(Pedidos pedido){
+    public Pedidos agregarPedido(Pedidos pedido)
+    {
         if (pedido != null)
         {
             var listaPedidosActualizada = datosPedidos.obtener("Pedidos.json");
             pedido.NroPedido = listaPedidosActualizada.Count;
             listaPedidosActualizada.Add(pedido);
-            datosPedidos.Guardar("Pedidos.json",listaPedidosActualizada);
-            
+            datosPedidos.Guardar("Pedidos.json", listaPedidosActualizada);
+
         }
-       
+
         return pedido;
     }
-    
-    /*
-     public ActionResult <string> AsignarPedido(int idCadete, int numPedido) {
-        var pedido = cadeteria.Pedidos.FirstOrDefault(p => p.Numero == numPedido);
-        var cadete = cadeteria.Cadetes.FirstOrDefault(p => p.Id == idCadete);
-        if (pedido != null) {
-            if (cadete != null) {
-                pedido.IdCadete = idCadete;
-                AccesoADatosPedidos.Guardar(cadeteria.Pedidos);
-                return (Ok(pedido));
-            }
-            return StatusCode(500,"No se pudo encontrar el cadete");
+
+     
+
+    public Pedidos cambiarEStadoPedido(int idPedido, int estado)
+    {
+        if (idPedido <= 0 || estado < 0 || estado > 2)
+        {
+            throw new ArgumentException("el numero de estado no es válido.");
         }
-        return StatusCode(500,"No se pudo encontrar el pedido");
-    } */
 
+        List<Pedidos> listPed = datosPedidos.obtener("Pedidos.json");
+        var pedido = listPed.FirstOrDefault(p => p.NroPedido == idPedido);
 
-    public Pedidos cambiarEStadoPedido(int idPedido, int estado){
-        // Pedidos pedido = null;
-        // estado --;
-        List<Pedidos> listPed =datosPedidos.obtener("Pedidos.json");
-         var pedido = listPed
-        .FirstOrDefault(p=>p.NroPedido == idPedido); 
-        if (pedido!= null && estado<=2 && estado>=0){
-            pedido.Estado = (Estado)estado;
-            datosPedidos.Guardar("Pedidos.json", listPed);
-            return pedido;
+        if (pedido == null)
+        {
+            throw new InvalidOperationException("El pedido no existe.");
         }
-        return null;
 
-    }
+        pedido.Estado = (Estado)estado;
+        datosPedidos.Guardar("Pedidos.json", listPed);
 
-
-    public Pedidos cambiarEStaadoPedido(int idPedido, int estado){
-        Pedidos pedido = null;
-        estado --;
-         pedido = this.lisPedCadeteria.FirstOrDefault(p=>p.NroPedido == idPedido); 
-        if (pedido!= null){
-            // pedido.Estado = pedido.getarreglosEstados(estado);
-        }
         return pedido;
-
     }
 
-   
+    // public List<Pedidos> mostrarPedidosPorEStado(int estado)
+    // {
+    //     estado--; //para que la opcion ingresada disminuya al valor de arrayEstados
 
-// public List<Pedidos> mostrarPedidosPorEStado(int estado)
-// {
-//     estado--; //para que la opcion ingresada disminuya al valor de arrayEstados
-    
-//     ///aca tendria que usar datosPedidos para traerlos
-//     List<Pedidos> pedidosFiltrados;
+    //     ///aca tendria que usar datosPedidos para traerlos
+    //     List<Pedidos> pedidosFiltrados;
 
-//      pedidosFiltrados = this.lisPedCadeteria
-//         .Where(pedido => pedido.Estado == (Estado)estado)
-//         .ToList();
+    //      pedidosFiltrados = this.lisPedCadeteria
+    //         .Where(pedido => pedido.Estado == (Estado)estado)
+    //         .ToList();
 
-   
-//         return pedidosFiltrados;
-    
-   
-// }
+
+    //         return pedidosFiltrados;
+
+
+    // }
 
 
     public void agregarCadete(string nombre, string direccion, string telefono)
@@ -196,28 +177,28 @@ public class Cadeteria
         this.cadetes.Add(nuevoCadete);
 
     }
- 
- /*EN ESTE CASO SERIA MEJOR QUE DEVUELVA UN PEDIDO ?*/
-     public bool asignarPedidos(int idPedido, int idCadete)
+
+    /*EN ESTE CASO SERIA MEJOR QUE DEVUELVA UN PEDIDO ?*/
+    public bool asignarPedidos(int idPedido, int idCadete)
     {
         var asignado = false;
-        var listPed =datosPedidos.obtener("Pedidos.json");
-         var pedido = listPed
-        .FirstOrDefault(p => p.NroPedido == idPedido);
+        var listPed = datosPedidos.obtener("Pedidos.json");
+        var pedido = listPed
+       .FirstOrDefault(p => p.NroPedido == idPedido);
 
-    if (pedido != null)
-    {
-        var cadete = this.cadetes
-            .FirstOrDefault(c => c.Id == idCadete);
-        if (cadete != null)
+        if (pedido != null)
         {
-            pedido.IdCadete = idCadete;
-            pedido.Estado = Estado.Proceso;
-            datosPedidos.Guardar("Pedidos.json",listPed);
-            asignado = true;
-          
+            var cadete = this.cadetes
+                .FirstOrDefault(c => c.Id == idCadete);
+            if (cadete != null)
+            {
+                pedido.IdCadete = idCadete;
+                pedido.Estado = Estado.Proceso;
+                datosPedidos.Guardar("Pedidos.json", listPed);
+                asignado = true;
+
+            }
         }
-    }
         return asignado;
     }
 
@@ -247,42 +228,45 @@ public class Cadeteria
     */
     public List<Cadete> mostrarCadetes()
     {
-        
+
         return this.cadetes;
-    } 
-   
-//hacerlo q busqe x id tmb.. hya una pequeña incongruencia cuando el usuario
-//no ingresa el nombre o no coincide.. igual se le remueve de la lista del otro
-//usuario.. estaria bueno una tipo promesa...
+    }
+
+    //hacerlo q busqe x id tmb.. hya una pequeña incongruencia cuando el usuario
+    //no ingresa el nombre o no coincide.. igual se le remueve de la lista del otro
+    //usuario.. estaria bueno una tipo promesa...
     public bool reasignarPedidos(int idPedido, int idCadete)
     {
         var reasignado = asignarPedidos(idPedido, idCadete);
         return reasignado;
     }
 
- 
-    public  void eliminarPedido( int idPedRemovido){
+
+    public void eliminarPedido(int idPedRemovido)
+    {
         var pedido = lisPedCadeteria.FirstOrDefault
-        (p => p.NroPedido == idPedRemovido); 
+        (p => p.NroPedido == idPedRemovido);
         if (pedido != null)
         {
             lisPedCadeteria.Remove(pedido);
-            
+
         }
 
-        
-    } 
 
-  
-    public double JornalACobrar(int idCadete ){
-        double montoACobrar = 0; 
-        var cadete = this.cadetes.FirstOrDefault(c => c.Id == idCadete); 
-        if (cadete != null ){
+    }
+
+
+    public double JornalACobrar(int idCadete)
+    {
+        double montoACobrar = 0;
+        var cadete = this.cadetes.FirstOrDefault(c => c.Id == idCadete);
+        if (cadete != null)
+        {
             var cantPedidosRealizados = this.lisPedCadeteria
             .Where(
                 pedido => pedido.Estado == Estado.Realizado && pedido.IdCadete == cadete.Id
                 ).ToList().Count;
-                montoACobrar = 500* cantPedidosRealizados;
+            montoACobrar = 500 * cantPedidosRealizados;
         }
 
 
